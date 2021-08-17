@@ -6,43 +6,23 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+ import React from 'react';
+ import { NativeModules, Button } from 'react-native';
+ const { CalendarModule } = NativeModules;
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-const App: () => Node = () => {
-    return(
-      <View style={styles.container}>
-        <Text style={styles.hello}>Hello World!!!</Text>
-      </View>
-    );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  hello: {
-    color: 'red',
-  },
-});
-
-export default App;
+ const NewModuleButton = () => {
+   const onPress = () => {
+    CalendarModule?.createCalendarEvent('testName', 'testLocation');
+     console.log('We will invoke the native module here!');
+   };
+ 
+   return (
+     <Button
+       title="Click to invoke your native module!"
+       color="#841584"
+       onPress={onPress}
+     />
+   );
+ };
+ 
+ export default NewModuleButton;
